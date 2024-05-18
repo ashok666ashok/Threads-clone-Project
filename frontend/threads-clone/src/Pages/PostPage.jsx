@@ -4,7 +4,7 @@ import PostActions from "../Components/PostActions";
 import Comment from '../Components/Comment';
 import useGetUserProfile from "../hooks/useGetUserProfile";
 import useShowToast from "../hooks/useShowToast";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { formatDistanceToNow } from "date-fns";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -68,15 +68,18 @@ function PostPage() {
     <>
     
       <Flex mt={20} >
-        <Flex w={"full"} alignItems={"center"} gap={3}>
+        <Link to={`/${user.username}`}>
+        <Flex w={"full"} alignItems={"center"} gap={3} >
           <Avatar src={user?.profilePic} size={"md"} name="markzuckerberg" />
           <Flex>
+          
             <Text fontSize={"sm"} fontWeight={"bold"}>
               {user?.username}
             </Text>
             <Image src="/verified.png" w={4} h={4} ml={4} mt={1} />
           </Flex>
         </Flex>
+        </Link>
         <Flex gap={4} alignItems={"center"} >
               <Text fontStyle={"sm"} fontSize={'xs'} width={36} textAlign={'right'} color={"gray.light"}>
                 {/* {post.createdAt?formatDistanceToNow(new Date(post.createdAt:Date.now()):10 days ago)}  */}
