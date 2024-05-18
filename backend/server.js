@@ -15,7 +15,7 @@ connectDB();
 
 
 const PORT = process.env.PORT || 5000;
-const _dirname=path.resolve()
+const __dirname=path.resolve()
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -32,6 +32,14 @@ app.use("/api/posts", postRoutes);
 app.use("/api/message", messageRoutes);
 
 // http://localhost:5000=>backend,frontend
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/frontend/threads-clone/dist")));
+
+	// react app
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "/frontend/threads-clone", "dist", "index.html"));
+	});
+}
 
 
 
